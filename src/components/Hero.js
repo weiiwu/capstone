@@ -30,7 +30,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className='mt-4'><Link className= 'py-2 px-4 rounded-full text-gray-700 bg-yellow' to='/booking'>Reserve a table</Link></div>
+            <div className='mt-4'><Link className= 'py-2 px-4 rounded-full text-gray-700 bg-yellow font-bold' to='/booking'>Reserve a table</Link></div>
 
 
           </div>

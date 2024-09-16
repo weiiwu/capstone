@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 const BookingForm = () => {
+  // State to keep track of the count
+  const [count, setCount] = useState(0);
+
+  // Function to handle increasing the count
+  const increase = () => {
+    setCount(count + 1);
+  };
+
+  // Function to handle decreasing the count with a condition
+  const decrease = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
   return (
     <>
       <section>
@@ -53,14 +68,32 @@ const BookingForm = () => {
                 <label className='block text-gray-700 font-bold mb-2'>
                   Guests Number
                 </label>
-                <input
-                  type='text'
-                  id='guest'
-                  name='guest'
-                  className='border rounded w-full py-2 px-3 mb-2'
-                  placeholder='Number'
-                  required
-                />
+
+
+                <div className="flex items-cente justify-center space-x-4">
+                  {/* Text field to display the current count */}
+                  <button
+                    className="m-4 bg-white text-gray-700 border border-gray-300 rounded-full font-bold py-2 px-4 rounded hover:bg-gray-700  hover:text-white"
+                    onClick={increase}
+                    disabled={count <= 0} // Disable button when count is 0
+                  >+</button>
+                  {/* Button to increase the count */}
+                  <input
+                    type="text"
+                    value={count}
+                    readOnly
+                     size="2"
+                    className="text-xl font-bold border border-gray-300 rounded p-2 text-center w-24"
+                  />
+                  {/* Button to decrease the count */}
+                  <button
+                    className="m-4 bg-white text-gray-700 border border-gray-300 rounded-full font-bold py-2 px-4 rounded hover:bg-gray-700  hover:text-white"
+                    onClick={decrease}
+                    disabled={count <= 0} // Disable button when count is 0
+                  >-</button>
+                </div>
+
+
               </div>
 
               <div className="border border-gray-100 mb-5"></div>
@@ -110,13 +143,13 @@ const BookingForm = () => {
 
               <div className='flex items-center justify-between'>
                 <button
-                  className="text-gray-700 bg-white border-gray-300 py-2 px-4 rounded-full" type="submit"
+                  className="bg-white text-gray-700 border border-gray-300 rounded-full font-bold py-2 px-4 rounded hover:bg-gray-700  hover:text-white" type="submit"
                 >
                   Cancel
                 </button>
 
                 <button
-                  className="text-gray-700 bg-yellow py-2 px-4 rounded-full"
+                  className="text-gray-700 bg-yellow py-2 px-4 rounded-full font-bold"
                   type="submit"
                 >
                   Confirm
