@@ -7,9 +7,9 @@ const Dishes = (props) => {
                 <div className="container-xl lg:container m-auto">
 
                     <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
-                        {props.dishes.map((prop) => (
+                        {props.dishes.map((prop,i) => (
 
-                            <div className="bg-white rounded-xl relative">
+                            <div className="bg-white rounded-xl relative" key={i}>
                                 <div className="p-4">
 
                                     <div className="flex flex-col lg:flex-row justify-between mb-4">

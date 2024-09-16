@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const BookingForm = () => {
-  // State to keep track of the count
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
   const [count, setCount] = useState(0);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
+  const navigate = useNavigate();
+  
   // Function to handle increasing the count
   const increase = () => {
     setCount(count + 1);
@@ -16,6 +24,27 @@ const BookingForm = () => {
     }
   };
 
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    // const booking = {
+    //   date,
+    //   time,
+    //   count,
+    //   name,
+    //   email,
+    //   phone
+    // }
+
+    //console.log(booking);
+
+
+    const message = `Your booking has been received. Here are the details:\n\nDate: ${date}\nTime: ${time}\nGuests: ${count}\nYour Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
+
+    alert(message);
+    navigate('/');
+  }
+
   return (
     <>
       <section>
@@ -23,11 +52,11 @@ const BookingForm = () => {
           <div
             className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
           >
-            <form>
+            <form onSubmit={submitForm}>
               <h2 className="text-3xl text-center font-semibold mb-6">Reserve a table</h2>
 
               <div className="mb-4">
-                <label for="type" className="block text-gray-700 font-bold mb-2"
+                <label htmlFor="type" className="block text-gray-700 font-bold mb-2"
                 >Date</label
                 >
                 <input
@@ -37,11 +66,13 @@ const BookingForm = () => {
                   className='border rounded w-full py-2 px-3 mb-2'
                   placeholder='Date'
                   required
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                 />
               </div>
 
               <div className="mb-4">
-                <label for="time" className="block text-gray-700 font-bold mb-2"
+                <label htmlFor="time" className="block text-gray-700 font-bold mb-2"
                 >Time</label
                 >
                 <select
@@ -49,7 +80,10 @@ const BookingForm = () => {
                   name="time"
                   className="border rounded w-full py-2 px-3"
                   required
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
                 >
+                  <option value="--:--">--:--</option>
                   <option value="10:00">10:00</option>
                   <option value="11:00">11:00</option>
                   <option value="12:00">12:00</option>
@@ -68,22 +102,20 @@ const BookingForm = () => {
                 <label className='block text-gray-700 font-bold mb-2'>
                   Guests Number
                 </label>
-
-
                 <div className="flex items-cente justify-center space-x-4">
                   {/* Text field to display the current count */}
                   <button
                     className="m-4 bg-white text-gray-700 border border-gray-300 rounded-full font-bold py-2 px-4 rounded hover:bg-gray-700  hover:text-white"
                     onClick={increase}
-                    disabled={count <= 0} // Disable button when count is 0
                   >+</button>
                   {/* Button to increase the count */}
                   <input
                     type="text"
-                    value={count}
-                    readOnly
-                     size="2"
+                    size="2"
                     className="text-xl font-bold border border-gray-300 rounded p-2 text-center w-24"
+                    value={count}
+                    onChange={(e) => setCount(e.target.value)}
+                    readOnly
                   />
                   {/* Button to decrease the count */}
                   <button
@@ -99,7 +131,7 @@ const BookingForm = () => {
               <div className="border border-gray-100 mb-5"></div>
 
               <div className="mb-4">
-                <label for="name" className="block text-gray-700 font-bold mb-2"
+                <label htmlFor="name" className="block text-gray-700 font-bold mb-2"
                 >Your Name</label
                 >
                 <input
@@ -108,12 +140,15 @@ const BookingForm = () => {
                   name="name"
                   className="border rounded w-full py-2 px-3"
                   placeholder="Please input your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
 
               <div className="mb-4">
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="block text-gray-700 font-bold mb-2"
                 >Contact Email</label
                 >
@@ -124,11 +159,13 @@ const BookingForm = () => {
                   className="border rounded w-full py-2 px-3"
                   placeholder="Please input your Email address"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-4">
                 <label
-                  for="phone"
+                  htmlFor="phone"
                   className="block text-gray-700 font-bold mb-2"
                 >Contact Phone</label
                 >
@@ -138,15 +175,18 @@ const BookingForm = () => {
                   name="phone"
                   className="border rounded w-full py-2 px-3"
                   placeholder="Please input your phone number"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
                 />
               </div>
 
               <div className='flex items-center justify-between'>
-                <button
-                  className="bg-white text-gray-700 border border-gray-300 rounded-full font-bold py-2 px-4 rounded hover:bg-gray-700  hover:text-white" type="submit"
+                <Link
+                  className="bg-white text-gray-700 border border-gray-300 rounded-full font-bold py-2 px-4 rounded hover:bg-gray-700  hover:text-white" to='/'
                 >
                   Cancel
-                </button>
+                </Link>
 
                 <button
                   className="text-gray-700 bg-yellow py-2 px-4 rounded-full font-bold"
